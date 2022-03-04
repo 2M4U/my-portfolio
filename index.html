@@ -115,6 +115,9 @@ body {
 #terminal__prompt--bling {  
   color: #dddddd;
 }
+.spotify {
+  color:green;
+}
 #terminal__prompt--cursor {
     display: block;
     height: 17px;
@@ -215,7 +218,7 @@ body {
       var artist = `${api.d.spotify.artist.split(";")[0].split(",")[0]}`;
       var song = `${api.d.spotify.song.split("(")[0]}`;
       spotifyListening.innerHTML = `sh ./portfolio.sh<br>Name: 2M4U<br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<br>
-      <i class="fab fa-spotify text-green-500 animate-spin ml-1 mr-1"></i> Listening to <a href="https://open.spotify.com/track/${api.d.spotify.track_id}" target="_blank" class="hover:text-gray-500 text-d-yes">${song}</a> by ${artist}<br><span id="terminal__prompt--cursor"></span>`;
+      <i class="fab fa-spotify spotify ml-1 mr-1"></i> Listening to <a href="https://open.spotify.com/track/${api.d.spotify.track_id}" target="_blank" class="hover:text-gray-500 text-d-yes" style="color: grey;">${song}</a> by ${artist}<br><span id="terminal__prompt--cursor"></span>`;
     } else {
       spotifyListening.innerHTML = 'sh ./portfolio.sh<br>Name: 2M4U<br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<br><span id="terminal__prompt--cursor"></span>';
     }
