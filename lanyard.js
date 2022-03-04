@@ -1,0 +1,69 @@
+var spotifyListening = document.getElementById("spotifyListening");
+
+const lanyard = new WebSocket("wss://api.lanyard.rest/socket");
+
+var api = {};
+var received = false;
+
+lanyard.onopen = function () {
+  lanyard.send(
+    JSON.stringify({
+      op: 2,
+      d: {
+        subscribe_to_id: "937051733773938689", // USER ID FROM DISCORD
+      },
+    })
+  );
+};
+
+setInterval(() => {
+  if (received) {
+    lanyard.send(
+      JSON.stringify({
+        op: 3,
+      })
+    );
+  }
+}, 30000);
+
+lanyard.onmessage = function (event) {
+  received = true;
+  api = JSON.parse(event.data);
+
+  switch (api.t) {
+    case "INIT_STATE":
+    case "PRESENCE_UPDATE":
+      update_presence();
+      break;
+  }
+};
+function update_presence() {
+  console.log(api.d);
+  let status;
+  switch (api.d.discord_status) {
+    case "dnd":
+      status =
+        '<div style="display: inline-block;  width: 10px; height: 10px; border-radius: 50%; background-color: red;"></div>';
+      break;
+    case "idle":
+      status =
+        '<div style="display: inline-block;  width: 10px; height: 10px; border-radius: 50%; background-color: yellow;"></div>';
+      break;
+    case "online":
+      status =
+        '<div style="display: inline-block;  width: 10px; height: 10px; border-radius: 50%; background-color: green;"></div>';
+      break;
+    case "offline":
+      status =
+        '<div style="display: inline-block;  width: 10px; height: 10px; border-radius: 50%; background-color: grey;"></div>';
+      break;
+  }
+  if (api.d.listening_to_spotify == true) {
+    var artist = `${api.d.spotify.artist.split(";")[0].split(",")[0]}`;
+    var song = `${api.d.spotify.song.split("(")[0]}`;
+    spotifyListening.innerHTML = `sh ./portfolio.sh<br>Name: 2M4U ${status} <sup>(${api.d.discord_user.username})</sup><br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<br>
+    <div class="typer"><i class="fab fa-spotify spotify ml-1 mr-1"></i> Listening to <a href="https://open.spotify.com/track/${api.d.spotify.track_id}" target="_blank" class="hover:text-gray-500 text-d-yes" style="color: grey;">${song}</a> by ${artist}<br><span id="terminal__prompt--cursor"></span></div>`;
+  } else {
+    spotifyListening.innerHTML = `sh ./portfolio.sh<br>Name: 2M4U ${status} <sup>(${api.d.discord_user.username})</sup><br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<br><span id="terminal__prompt--cursor"></span>`;
+  }
+}
