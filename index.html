@@ -167,7 +167,7 @@ body {
    var spotifyListening = document.getElementById("spotifyListening");
 
   window.onload = function() {
-    spotifyListening.innerHTML = 'sh ./portfolio.sh<br>Name: 2M4U<br>Loc: United Kingdom<br>Repositories: <br>Contact Me: <span id="terminal__prompt--cursor"></span>';
+    spotifyListening.innerHTML = 'sh ./portfolio.sh<br>Name: 2M4U<br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<span id="terminal__prompt--cursor"></span>';
   };
  
   const lanyard = new WebSocket("wss://api.lanyard.rest/socket");
@@ -209,10 +209,10 @@ body {
       console.log(api.d.spotify)
       var artist = `${api.d.spotify.artist.split(";")[0].split(",")[0]}`;
       var song = `${api.d.spotify.song.split("(")[0]}`;
-      spotifyListening.innerHTML = `sh ./portfolio.sh<br>Name: 2M4U<br>Loc: United Kingdom<br>Repositories: <br>Contact Me: <br>
+      spotifyListening.innerHTML = `sh ./portfolio.sh<br>Name: 2M4U<br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<br>
       <i class="fab fa-spotify text-green-500 animate-spin ml-1 mr-1"></i> Listening to <a href="https://open.spotify.com/track/${api.d.spotify.track_id}" target="_blank" class="hover:text-gray-500 text-d-yes">${song}</a> by ${artist}<br><span id="terminal__prompt--cursor"></span>`;
     } else {
-      spotifyListening.innerHTML = 'sh ./portfolio.sh<br>Name: 2M4U<br>Loc: United Kingdom<br>Repositories: <br>Contact Me: <br><span id="terminal__prompt--cursor"></span>';
+      spotifyListening.innerHTML = 'sh ./portfolio.sh<br>Name: 2M4U<br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<br><span id="terminal__prompt--cursor"></span>';
     }
   }
 </script>
