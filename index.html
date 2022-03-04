@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool@latest/disable-devtool.min.js" url="/?"></script>
+
 <style>
   @import url('https://fonts.googleapis.com/css?family=Ubuntu');
   @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono'); 
@@ -114,12 +115,44 @@ body {
 .spotify {
   color: #AAFF00;
 }
+
+
+.status {
+    display: inline-block;
+    margin-left: 4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgb(255, 82, 82);
+    animation:blink 1200ms rgb(255, 82, 82) infinite 
+    /* 2s ease-in-out 0s infinite normal none running jDeFty; */
+}
 #terminal__prompt--cursor {
     display: block;
     height: 17px;
     width: 3px;
     /* margin-left: 9px; */
     animation: blink 1200ms linear infinite;
+}
+.typer {
+ 
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
 }
 @keyframes blink {  
   0% {    
@@ -160,8 +193,9 @@ body {
         <span id="terminal__prompt--user">2M4U@1.3.3.7:</span>            
         <span id="terminal__prompt--location">~</span>            
         <span id="terminal__prompt--bling">$</span>&nbsp;
+        
         <span id="spotifyListening" style="color: white;"/></span>           
-       
+        <span id='statusIcon'></span>
                
       </div>        
     </section>      
@@ -169,7 +203,8 @@ body {
 </main>
 <script defer>
    var spotifyListening = document.getElementById("spotifyListening");
- 
+  var statusIcon = document.getElementById("statusIcon");
+
  
   const lanyard = new WebSocket("wss://api.lanyard.rest/socket");
 
@@ -209,15 +244,31 @@ body {
     }
   };
   function update_presence() {
+    console.log(api.d)
+    let status;
+    switch(api.d.discord_status){
+      case 'dnd':
+        status = '<div style="display: inline-block;  width: 10px; height: 10px; border-radius: 50%; background-color: red;"></div>'
+        break;
+      case 'idle':
+        status = '<div style="display: inline-block;  width: 10px; height: 10px; border-radius: 50%; background-color: yellow;"></div>'
+        break;
+      case 'online':
+        status = '<div style="display: inline-block;  width: 10px; height: 10px; border-radius: 50%; background-color: green;"></div>'
+        break;
+      case 'offline':
+        status = '<div style="display: inline-block;  width: 10px; height: 10px; border-radius: 50%; background-color: grey;"></div>'
+        break;
+    }
     if (api.d.listening_to_spotify == true) {
-      console.log(api.d.spotify)
       var artist = `${api.d.spotify.artist.split(";")[0].split(",")[0]}`;
       var song = `${api.d.spotify.song.split("(")[0]}`;
-      spotifyListening.innerHTML = `sh ./portfolio.sh<br>Name: 2M4U<br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<br>
-      <i class="fab fa-spotify spotify ml-1 mr-1"></i> Listening to <a href="https://open.spotify.com/track/${api.d.spotify.track_id}" target="_blank" class="hover:text-gray-500 text-d-yes" style="color: grey;">${song}</a> by ${artist}<br><span id="terminal__prompt--cursor"></span>`;
+      spotifyListening.innerHTML = `sh ./portfolio.sh<br>Name: 2M4U ${status} <sup>(${api.d.discord_user.username})</sup><br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<br>
+      <div class="typer"><i class="fab fa-spotify spotify ml-1 mr-1"></i> Listening to <a href="https://open.spotify.com/track/${api.d.spotify.track_id}" target="_blank" class="hover:text-gray-500 text-d-yes" style="color: grey;">${song}</a> by ${artist}<br><span id="terminal__prompt--cursor"></span></div>`;
     } else {
-      spotifyListening.innerHTML = 'sh ./portfolio.sh<br>Name: 2M4U<br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<br><span id="terminal__prompt--cursor"></span>';
+      spotifyListening.innerHTML = `sh ./portfolio.sh<br>Name: 2M4U ${status} <sup>(${api.d.discord_user.username})</sup><br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<br><span id="terminal__prompt--cursor"></span>`;
     }
+
   }
 </script>
 </html>
