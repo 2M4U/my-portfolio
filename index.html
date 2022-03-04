@@ -1,33 +1,29 @@
 <html>
   <head>
 
-<title>2M4U@1.3.3.7: ~ </title>
-<meta name="description" content="My personal portfolio with lanyard">
+    <title>2M4U@1.3.3.7: ~ </title>
+    <meta name="description" content="My personal portfolio with lanyard">
 
-<meta itemprop="name" content="2M4U@1.3.3.7: ~ ">
-<meta itemprop="description" content="My personal portfolio with lanyard">
-<meta itemprop="image" content="">
+    <meta itemprop="name" content="2M4U@1.3.3.7: ~ ">
+    <meta itemprop="description" content="My personal portfolio with lanyard">
+    <meta itemprop="image" content="">
 
-<meta property="og:url" content="/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="2M4U@1.3.3.7: ~ ">
-<meta property="og:description" content="My personal portfolio with lanyard">
-<meta property="og:image" content="">
+    <meta property="og:url" content="/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="2M4U@1.3.3.7: ~ ">
+    <meta property="og:description" content="My personal portfolio with lanyard">
+    <meta property="og:image" content="">
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="2M4U@1.3.3.7: ~ ">
-<meta name="twitter:description" content="My personal portfolio with lanyard">
-<meta name="twitter:image" content="">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="2M4U@1.3.3.7: ~ ">
+    <meta name="twitter:description" content="My personal portfolio with lanyard">
+    <meta name="twitter:image" content="">
 
-  </head>
+ </head>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool@latest/disable-devtool.min.js" url="/?"></script>
-
-<style>
- 
-</style>
+<script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool@latest/disable-devtool.min.js" url="https://github.com/2m4u/my-portfolio"></script>
 
 <main id="container">
   <div id="terminal">      
@@ -44,82 +40,10 @@
         <span id="terminal__prompt--user">2M4U@1.3.3.7:</span>            
         <span id="terminal__prompt--location">~</span>            
         <span id="terminal__prompt--bling">$</span>&nbsp;
-        
-        <span id="spotifyListening" style="color: white;"/></span>           
-        <span id='statusIcon'></span>
-               
+        <span id="spotifyListening" style="color: white;"/></span>                         
       </div>        
     </section>      
   </div>    
 </main>
-<script defer>
-   var spotifyListening = document.getElementById("spotifyListening");
-  var statusIcon = document.getElementById("statusIcon");
-
- 
-  const lanyard = new WebSocket("wss://api.lanyard.rest/socket");
-
-  var api = {};
-  var received = false;
-
-  lanyard.onopen = function () {
-    lanyard.send(
-      JSON.stringify({
-        op: 2,
-        d: {
-          subscribe_to_id: "937051733773938689",
-        },
-      })
-    );
-  };
-
-  setInterval(() => {
-    if (received) {
-      lanyard.send(
-        JSON.stringify({
-          op: 3,
-        })
-      );
-    }
-  }, 30000);
-
-  lanyard.onmessage = function (event) {
-    received = true;
-    api = JSON.parse(event.data);
-
-    switch (api.t) {
-      case 'INIT_STATE':
-      case 'PRESENCE_UPDATE':
-          update_presence();
-        break;
-    }
-  };
-  function update_presence() {
-    console.log(api.d)
-    let status;
-    switch(api.d.discord_status){
-      case 'dnd':
-        status = '<div style="display: inline-block;  width: 10px; height: 10px; border-radius: 50%; background-color: red;"></div>'
-        break;
-      case 'idle':
-        status = '<div style="display: inline-block;  width: 10px; height: 10px; border-radius: 50%; background-color: yellow;"></div>'
-        break;
-      case 'online':
-        status = '<div style="display: inline-block;  width: 10px; height: 10px; border-radius: 50%; background-color: green;"></div>'
-        break;
-      case 'offline':
-        status = '<div style="display: inline-block;  width: 10px; height: 10px; border-radius: 50%; background-color: grey;"></div>'
-        break;
-    }
-    if (api.d.listening_to_spotify == true) {
-      var artist = `${api.d.spotify.artist.split(";")[0].split(",")[0]}`;
-      var song = `${api.d.spotify.song.split("(")[0]}`;
-      spotifyListening.innerHTML = `sh ./portfolio.sh<br>Name: 2M4U ${status} <sup>(${api.d.discord_user.username})</sup><br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<br>
-      <div class="typer"><i class="fab fa-spotify spotify ml-1 mr-1"></i> Listening to <a href="https://open.spotify.com/track/${api.d.spotify.track_id}" target="_blank" class="hover:text-gray-500 text-d-yes" style="color: grey;">${song}</a> by ${artist}<br><span id="terminal__prompt--cursor"></span></div>`;
-    } else {
-      spotifyListening.innerHTML = `sh ./portfolio.sh<br>Name: 2M4U ${status} <sup>(${api.d.discord_user.username})</sup><br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<br><span id="terminal__prompt--cursor"></span>`;
-    }
-
-  }
-</script>
+<script defer src="lanyard.js"></script>
 </html>
