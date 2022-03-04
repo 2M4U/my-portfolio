@@ -169,10 +169,7 @@ body {
 </main>
 <script defer>
    var spotifyListening = document.getElementById("spotifyListening");
-
-  window.onload = function() {
-    spotifyListening.innerHTML = 'sh ./portfolio.sh<br>Name: 2M4U<br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<span id="terminal__prompt--cursor"></span>';
-  };
+ 
  
   const lanyard = new WebSocket("wss://api.lanyard.rest/socket");
 
@@ -198,14 +195,17 @@ body {
         })
       );
     }
-  }, 1000);
+  }, 30000);
 
   lanyard.onmessage = function (event) {
     received = true;
     api = JSON.parse(event.data);
 
-    if (api.t === "PRESENCE_UPDATE") {
-      update_presence();
+    switch (api.t) {
+      case 'INIT_STATE':
+      case 'PRESENCE_UPDATE':
+          update_presence();
+        break;
     }
   };
   function update_presence() {
