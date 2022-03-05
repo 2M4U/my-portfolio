@@ -10,7 +10,7 @@ lanyard.onopen = function () {
     JSON.stringify({
       op: 2,
       d: {
-        subscribe_to_id: "937051733773938689", // USER ID FROM DISCORD
+        subscribe_to_id: "937051733773938689",
       },
     })
   );
@@ -61,9 +61,9 @@ function update_presence() {
   if (api.d.listening_to_spotify == true) {
     var artist = `${api.d.spotify.artist.split(";")[0].split(",")[0]}`;
     var song = `${api.d.spotify.song.split("(")[0]}`;
-    spotifyListening.innerHTML = `sh ./portfolio.sh<br>Name: 2M4U ${status} <sup>(${api.d.discord_user.username})</sup><br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<br>
+    spotifyListening.innerHTML = `sh ./portfolio.sh<br>Name: 2M4U ${status} <sup>(${api.d.discord_user.username})</sup><br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<br>About Me:I'm a 27 year old Full-Stack Developer from Ireland who has a sole passion for coding and computers.<br>I have over 5 years experience in JavaScript, HTML, LSL (Linden Scripting Language), Discord Bots and much more.<br>I have alot of open-source projects on my Github.<br>I will eventually add my resume to this site at a later date.<br>
     <div class="typer"><i class="fab fa-spotify spotify ml-1 mr-1"></i> Listening to <a href="https://open.spotify.com/track/${api.d.spotify.track_id}" target="_blank" class="hover:text-gray-500 text-d-yes" style="color: grey;">${song}</a> by ${artist}<br><span id="terminal__prompt--cursor"></span></div>`;
   } else {
-    spotifyListening.innerHTML = `sh ./portfolio.sh<br>Name: 2M4U ${status} <sup>(${api.d.discord_user.username})</sup><br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<br><span id="terminal__prompt--cursor"></span>`;
+    spotifyListening.innerHTML = `sh ./portfolio.sh<br>Name: 2M4U ${status} <sup>(${api.d.discord_user.username})</sup><br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<br>About Me:I'm a 27 year old Full-Stack Developer from Ireland who has a sole passion for coding and computers.<br>I have over 5 years experience in JavaScript, HTML, LSL (Linden Scripting Language), Discord Bots and much more.<br>I have alot of open-source projects on my Github.<br>I will eventually add my resume to this site at a later date.<span id="terminal__prompt--cursor"></span>`;
   }
 }
