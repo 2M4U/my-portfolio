@@ -4,7 +4,9 @@ const lanyard = new WebSocket("wss://api.lanyard.rest/socket");
 
 var api = {};
 var received = false;
-
+lanyard.addEventListener('close', event => {
+console.log(event)
+});
 lanyard.onopen = function () {
   lanyard.send(
     JSON.stringify({
