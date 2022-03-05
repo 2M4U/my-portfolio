@@ -6,4 +6,5 @@
 ###### I got bored so I thought I'd try making a Linux-based GUI Spotify/Portfolio.
 
 # Example
+*Live Preview: [My Portfolio](https://2m4u.netlify.app/)*
 <img src="https://i.imgur.com/8DjZHRj.png"/>
