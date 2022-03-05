@@ -5,6 +5,15 @@
 ###### This is just an example using Lanyard for the Spotify Feature.
 ###### I got bored so I thought I'd try making a Linux-based GUI Spotify/Portfolio.
 
-# Example
-*Live Preview: [My Portfolio](https://2m4u.netlify.app/)*
+
+*[View Demo](https://2m4u.netlify.app/)*
+
+##### Screenshot Example
 <img src="https://i.imgur.com/8DjZHRj.png"/>
+
+## Acknowledgements
+
+- [Phineas Walton](https://github.com/Phineas/) – Author of Lanyard
+- [2M4U](https://github.com/2m4u/) – Author of this Portfolio
+- [Dustin Rouillard](https://github.com/dustinrouillard/) – for bits of helpful guidance with setting up Lanyard
+- [pxseu](https://github.com/pxseu) - helpful guidance on fixing the socket closing bug I have
