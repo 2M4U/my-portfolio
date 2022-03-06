@@ -62,13 +62,14 @@ function time(millis) {
 }
 
 function update_presence() {
-  //console.log(api.d);
+  console.log(api.d.spotify.timestamps);
 
   let spotify = api.d.spotify;
+  var elapsed = currentTime - spotify.timestamps.start;
+
+  console.log(time(elapsed));
   if (api.d.listening_to_spotify == true) {
     const songLength = spotify.timestamps.end - spotify.timestamps.start;
-    var elapsed = currentTime - spotify.timestamps.start;
-    console.log(elapsed);
 
     var artist = `${spotify.artist.split(";")[0].split(",")[0]}`;
     var song = `${spotify.song.split("(")[0]}`;
