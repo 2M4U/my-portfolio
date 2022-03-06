@@ -36,7 +36,7 @@ function spotifyUpdate(spotify) {
 
   setInterval(() => {
     spotifyUpdate(spotify);
-  }, 30000);
+  }, 1000);
   return timeElapsed;
 }
 
