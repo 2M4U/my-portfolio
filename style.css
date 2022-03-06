@@ -1,4 +1,4 @@
-/* Custome CSS by 2M4U */
+/* Custom CSS by 2M4U */
 @import url("https://fonts.googleapis.com/css?family=Ubuntu");
 @import url("https://fonts.googleapis.com/css?family=Ubuntu+Mono");
 @import url("https://fonts.googleapis.com/css?family=Bubbler+One");
@@ -164,4 +164,8 @@ body {
 }
 .copyright-text {
   font-weight: 600;
+}
+footer {
+    position: fixed;
+    bottom: .5rem
 }
