@@ -24,13 +24,22 @@ lanyard.onopen = function () {
     })
   );
 };
- function bday(d1, d2) {
-    //console.log(d2)
-    let date1 = new Date(d1);
-    let date2 = new Date(d2);
-    let yearsDiff =  date2.getFullYear() - date1.getFullYear();
-    return yearsDiff;
+function bday(d1, d2) {
+  //console.log(d2)
+  let date1 = new Date(d1);
+  let date2 = new Date(d2);
+  let yearsDiff = date2.getFullYear() - date1.getFullYear();
+  return yearsDiff;
 }
+function spotifyUpdate(spotify) {
+  const timeElapsed = currentTime - spotify.timestamps.start;
+
+  setInterval(() => {
+    spotifyUpdate(spotify);
+  }, 30000);
+  return timeElapsed;
+}
+
 setInterval(() => {
   if (received) {
     lanyard.send(
@@ -76,7 +85,6 @@ function update_presence() {
   let spotify = api.d.spotify;
   if (api.d.listening_to_spotify == true) {
     const songLength = spotify.timestamps.end - spotify.timestamps.start;
-    const timeElapsed = currentTime - spotify.timestamps.start;
     function msToMinSeconds(millis) {
       var minutes = Math.floor(millis / 60000);
       var seconds = Number(((millis % 60000) / 1000).toFixed(0));
@@ -84,11 +92,22 @@ function update_presence() {
         ? minutes + 1 + ":00"
         : minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
     }
+    let newData = spotifyUpdate(spotify)
     var artist = `${spotify.artist.split(";")[0].split(",")[0]}`;
     var song = `${spotify.song.split("(")[0]}`;
-    spotifyListening.innerHTML = `sh ./portfolio.sh<br>Name: 2M4U ${status} <sup>(${api.d.discord_user.username})</sup><br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<br>About Me:<br>I'm a ${bday("1994", Date())} year old Full-Stack Developer from Ireland who has a sole passion for coding and computers.<br>I have over 5 years experience in JavaScript, HTML, LSL, Discord Bots and much more.<br>I have alot of open-source projects on my Github.<br>I will eventually add my resume to this site at a later date.<br>
-    <div class="typer"><i class="fab fa-spotify spotify ml-1 mr-1"></i> Listening to <a href="https://open.spotify.com/track/${api.d.spotify.track_id}" target="_blank" class="hover:text-gray-500 text-d-yes" style="color: grey;">${song}</a> by ${artist}<br> ${msToMinSeconds(timeElapsed)} - ${msToMinSeconds(songLength)}<span id="terminal__prompt--cursor"></span></div>`;
+    spotifyListening.innerHTML = `sh ./portfolio.sh<br>Name: 2M4U ${status} <sup>(${
+      api.d.discord_user.username
+    })</sup><br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<br>About Me:<br>I'm a ${bday(
+      "1994",
+      Date()
+    )} year old Full-Stack Developer from Ireland who has a sole passion for coding and computers.<br>I have over 5 years experience in JavaScript, HTML, LSL, Discord Bots and much more.<br>I have alot of open-source projects on my Github.<br>I will eventually add my resume to this site at a later date.<br>
+    <div class="typer"><i class="fab fa-spotify spotify ml-1 mr-1"></i> Listening to <a href="https://open.spotify.com/track/${spotify.track_id}" target="_blank" class="hover:text-gray-500 text-d-yes" style="color: grey;">${song}</a> by ${artist}<br> ${msToMinSeconds(newData)} - ${msToMinSeconds(songLength)}<span id="terminal__prompt--cursor"></span></div>`;
   } else {
-    spotifyListening.innerHTML = `sh ./portfolio.sh<br>Name: 2M4U ${status} <sup>(${api.d.discord_user.username})</sup><br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<br>About Me:<br>I'm a ${bday("1994", Date())} year old Full-Stack Developer from Ireland who has a sole passion for coding and computers.<br>I have over 5 years experience in JavaScript, HTML, LSL, Discord Bots and much more.<br>I have alot of open-source projects on my Github.<br>I will eventually add my resume to this site at a later date.<span id="terminal__prompt--cursor"></span>`;
+    spotifyListening.innerHTML = `sh ./portfolio.sh<br>Name: 2M4U ${status} <sup>(${
+      api.d.discord_user.username
+    })</sup><br>Loc: United Kingdom<br>Repositories: <a href="https://github.com/2m4u">Github</a> <br>Contact Me: comingsoon@2m4u.lol<br>About Me:<br>I'm a ${bday(
+      "1994",
+      Date()
+    )} year old Full-Stack Developer from Ireland who has a sole passion for coding and computers.<br>I have over 5 years experience in JavaScript, HTML, LSL, Discord Bots and much more.<br>I have alot of open-source projects on my Github.<br>I will eventually add my resume to this site at a later date.<span id="terminal__prompt--cursor"></span>`;
   }
 }
