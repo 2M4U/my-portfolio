@@ -53,7 +53,7 @@ lanyard.onmessage = function (event) {
   }
 };
 function update_presence() {
-  console.log(api.d);
+  //console.log(api.d);
   let status;
   switch (api.d.discord_status) {
     case "dnd":
