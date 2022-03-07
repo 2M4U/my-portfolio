@@ -87,7 +87,7 @@ body {
   color: #dddddd;
 }
 .spotify {
-  color: #aaff00;
+  color: #1DB954;
 }
 .tooltip .tooltiptext {
   visibility: hidden;
@@ -256,17 +256,17 @@ footer {
   font-weight: 600;
 }
 a {
-  color: #aaff00;
+  color: #1DB954;
   text-decoration: none;
 }
 
 a:visited {
-  color: #aaff00;
+  color: #1DB954;
   text-decoration: none;
 }
 
 a:active {
-  color: #aaff00;
+  color: #1DB954;
   text-decoration: none;
 }
 
