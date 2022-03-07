@@ -9,7 +9,7 @@
 *[View Demo](https://2m4u.netlify.app/)*
 
 ##### Screenshot Example
-<img src="https://i.imgur.com/8DjZHRj.png"/>
+<img src="https://i.imgur.com/CLrZtBU.gif"/>
 
 ## Acknowledgements
 
