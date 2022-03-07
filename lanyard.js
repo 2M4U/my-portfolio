@@ -52,10 +52,12 @@ document.onreadystatechange = () => {
     Icon: document.getElementById("icon"),
     DiscordUsername: document.getElementById("username"),
     DiscordStatus: document.getElementById("status"),
+    Bio: document.getElementById("bio"),
   };
 
   var status;
   function presenceUpdate(presence) {
+   
     switch (presence.discord_status) {
       case "dnd":
         status = "red";

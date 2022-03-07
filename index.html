@@ -27,6 +27,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!---<script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool@latest/disable-devtool.min.js" url="https://github.com/2m4u/my-portfolio"></script>
    -->
+   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 <main id="container">
    <div id="terminal">
       <section id="terminal__bar">
@@ -42,6 +43,10 @@
             <span id="terminal__prompt--user">2M4U@1.3.3.7:</span>            
             <span id="terminal__prompt--location">~</span>            
             <span id="terminal__prompt--bling">$</span>&nbsp;
+            <!-- <div id="typed-strings">
+                <p>Typed.js is a <strong>JavaScript</strong> library.</p>
+                <p>It <em>types</em> out sentences.</p>
+              </div> -->
             <span id="bio" style="color: white;"/>
             Coming Soon
             </span>
@@ -93,4 +98,10 @@
       </footer> -->
 </main>
 <script defer src="lanyard.js"></script>
+<script>
+    var typed = new Typed('#bio', {
+      strings: ['', 'sh ./portfolio',"Welcome to my playground!<br>My alias is 2M4U, I am a 27 year old Cyber Security Enthusiast.<br>I have spent the past 10+ years studying and coding many opensource projects.<br>I have some knowledge in networking and other fields surrounding Cyber Security.<br>You can check out my repos by clicking the Github Icon below.<br>This source is also avaliable on my Github."],
+      typeSpeed: 60
+    });
+  </script>
 </html>
