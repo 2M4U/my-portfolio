@@ -53,6 +53,7 @@ document.onreadystatechange = () => {
     Icon: document.getElementById("icon"),
     DiscordUsername: document.getElementById("username"),
     DiscordStatus: document.getElementById("status"),
+    Avatar: document.getElementById("avatar"),
     Bio: document.getElementById("bio"),
   };
 
@@ -81,6 +82,7 @@ document.onreadystatechange = () => {
       Elements.DiscordStatus.style["background-color"] = status;
       Elements.Album.style.visibility = "hidden";
       Elements.Album.src = "";
+      Elements.Avatar.src = `https://cdn.discordapp.com/avatars/${presence.discord_user.id}/${presence.discord_user.avatar}`;
       clearInterval(spotifyInterval);
     } else {
       var artist = `${presence.spotify.artist.split(";")[0].split(",")[0]}`;
@@ -91,7 +93,7 @@ document.onreadystatechange = () => {
       Elements.Artist.innerText = artist;
       Elements.DiscordUsername.innerText = presence.discord_user.username;
       Elements.DiscordStatus.style["background-color"] = status;
-
+      Elements.Avatar.src = `https://cdn.discordapp.com/avatars/${presence.discord_user.id}/${presence.discord_user.avatar}`;
       //   log(Elements.Spotify.style['background-image'])
       Elements.Album.style.visibility = "visible";
       Elements.Album.src = presence.spotify.album_art_url;
@@ -153,6 +155,7 @@ document.onreadystatechange = () => {
       clearInterval(lanyardHeartbeat);
       clearInterval(spotifyInterval);
       log("Socket closed", event.reason, event.code);
+      log("Attempting to reconnect.");
       connect();
     };
   }
