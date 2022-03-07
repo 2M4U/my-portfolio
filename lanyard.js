@@ -48,6 +48,7 @@ document.onreadystatechange = () => {
     Spotify: document.getElementById("album"),
     Name: document.getElementById("name"),
     Artist: document.getElementById("artist"),
+    Album: document.getElementById("album"),
     Timestamp: document.getElementById("timestamp"),
     Icon: document.getElementById("icon"),
     DiscordUsername: document.getElementById("username"),
@@ -57,7 +58,6 @@ document.onreadystatechange = () => {
 
   var status;
   function presenceUpdate(presence) {
-   
     switch (presence.discord_status) {
       case "dnd":
         status = "red";
@@ -79,7 +79,8 @@ document.onreadystatechange = () => {
       Elements.Timestamp.innerText = "";
       Elements.DiscordUsername.innerText = presence.discord_user.username;
       Elements.DiscordStatus.style["background-color"] = status;
-      //   Elements.Spotify.style.visibility = "hidden"
+      Elements.Album.style.visibility = "hidden";
+      Elements.Album.src = "";
       clearInterval(spotifyInterval);
     } else {
       var artist = `${presence.spotify.artist.split(";")[0].split(",")[0]}`;
@@ -90,10 +91,10 @@ document.onreadystatechange = () => {
       Elements.Artist.innerText = artist;
       Elements.DiscordUsername.innerText = presence.discord_user.username;
       Elements.DiscordStatus.style["background-color"] = status;
-      //   Elements.Song. = "https://open.spotify.com/track/" + link;
+
       //   log(Elements.Spotify.style['background-image'])
-      //   Elements.Spotify.style.visibility = "visible"
-      //   Elements.Spotify.src = presence.spotify.album_art_url;
+      Elements.Album.style.visibility = "visible";
+      Elements.Album.src = presence.spotify.album_art_url;
 
       function updateTimestamp() {
         Elements.Timestamp.innerText = `${time(
