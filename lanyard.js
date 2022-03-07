@@ -1,4 +1,9 @@
-/* Credits to Dustin */
+/**
+ * @author Dustin; Modified by 2M4U.
+ * @description Almost fully working Lanyard/Spotify script in pure Vanilla JS.
+ * @copyright 2022
+ * @private This script MUST remain with this header if you use this script as it's only fair to give credit where due.
+ */
 
 function log(...content) {
   let mainContent = content[0];
@@ -7,7 +12,7 @@ function log(...content) {
 
   console.log(
     `%cLanyard API%c ${mainContent}`,
-    "padding: 10px; font-size: 1em; line-height: 1.4em; color: white; background: #151515; border-radius: 15px;",
+    "padding: 6px; font-size: 1em; line-height: 1.4em; color: white; background: #151515; border-radius: 15px;",
     "font-size: 15px;",
     ...content
   );
@@ -44,34 +49,55 @@ document.onreadystatechange = () => {
     Name: document.getElementById("name"),
     Artist: document.getElementById("artist"),
     Timestamp: document.getElementById("timestamp"),
+    Song: document.getElementById("song"),
+    DiscordUsername: document.getElementById("username"),
+    DiscordStatus: document.getElementById("status"),
   };
 
+  var status;
   function presenceUpdate(presence) {
+    switch (presence.discord_status) {
+      case "dnd":
+        status = "red";
+        break;
+      case "idle":
+        status = "yellow";
+        break;
+      case "online":
+        status = "green";
+        break;
+      case "offline":
+        status = "grey";
+        break;
+    }
     if (!presence.listening_to_spotify) {
-      Elements.Name.innerText = "Nothing playing";
+      Elements.Name.innerText = "";
       Elements.Artist.innerText = "";
       Elements.Timestamp.innerText = "";
-      Elements.Spotify.style.visibility = "hidden"
+      Elements.DiscordUsername.innerText = presence.discord_user.username;
+      Elements.DiscordStatus.style["background-color"] = status;
+      //   Elements.Spotify.style.visibility = "hidden"
       clearInterval(spotifyInterval);
     } else {
       var artist = `${presence.spotify.artist.split(";")[0].split(",")[0]}`;
       var song = `${presence.spotify.song.split("(")[0]}`;
-      log(presence.spotify);
+      var link = presence.spotify.track_id;
       Elements.Name.innerText = song;
       Elements.Artist.innerText = artist;
+      Elements.DiscordUsername.innerText = presence.discord_user.username;
+      Elements.DiscordStatus.style["background-color"] = status;
+      //   Elements.Song. = "https://open.spotify.com/track/" + link;
       //   log(Elements.Spotify.style['background-image'])
-      Elements.Spotify.style.visibility = "visible"
-      Elements.Spotify.src = presence.spotify.album_art_url;
+      //   Elements.Spotify.style.visibility = "visible"
+      //   Elements.Spotify.src = presence.spotify.album_art_url;
 
       function updateTimestamp() {
-  
         Elements.Timestamp.innerText = `${time(
           new Date().getTime() - presence.spotify.timestamps.start
         )} - ${time(
           presence.spotify.timestamps.end - presence.spotify.timestamps.start
         )}`;
       }
-
       clearInterval(spotifyInterval);
       spotifyInterval = setInterval(() => updateTimestamp(), 900);
       updateTimestamp();
@@ -87,7 +113,7 @@ document.onreadystatechange = () => {
     }
 
     socket.onopen = () => {
-      log("Connected to socket");
+      log("Connected to Gateway");
     };
 
     socket.onmessage = (event) => {
@@ -95,8 +121,6 @@ document.onreadystatechange = () => {
 
       switch (data.op) {
         case Op.Hello: {
-          log("Got hello op");
-
           lanyardHeartbeat = setInterval(
             () => send(Op.Heartbeat),
             data.d.heartbeat_interval
@@ -130,3 +154,25 @@ document.onreadystatechange = () => {
 
   connect();
 };
+console.log(
+  "%cWHOA THERE!",
+  "color: #314ef5; font-weight: bold;; font-size: 50px"
+);
+console.log(
+  "%cIf someone told you to paste something here, it's VERY likely you're being scammed.",
+  "color: white; font-size: 20px"
+);
+console.log(
+  "%cPasting something here could give hackers access to your browser!",
+  "color: red; font-size: 25px"
+);
+console.log(
+  "%cCredits to Discord.com for this lovely meme lmao!",
+  "color: white; font-size: 15px"
+);
+console.log(
+    "%cAlso, why skid-rip this site when it's opensourced here: https://github.com/2m4u/my-portfolio",
+    "color: white; font-size: 10px"
+  );
+
+
