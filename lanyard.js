@@ -49,7 +49,7 @@ document.onreadystatechange = () => {
     Name: document.getElementById("name"),
     Artist: document.getElementById("artist"),
     Timestamp: document.getElementById("timestamp"),
-    Song: document.getElementById("song"),
+    Icon: document.getElementById("icon"),
     DiscordUsername: document.getElementById("username"),
     DiscordStatus: document.getElementById("status"),
   };
@@ -71,6 +71,7 @@ document.onreadystatechange = () => {
         break;
     }
     if (!presence.listening_to_spotify) {
+      Elements.Icon.href = "";
       Elements.Name.innerText = "";
       Elements.Artist.innerText = "";
       Elements.Timestamp.innerText = "";
@@ -82,6 +83,7 @@ document.onreadystatechange = () => {
       var artist = `${presence.spotify.artist.split(";")[0].split(",")[0]}`;
       var song = `${presence.spotify.song.split("(")[0]}`;
       var link = presence.spotify.track_id;
+      Elements.Icon.href = `https://open.spotify.com/track/${presence.spotify.track_id}`;
       Elements.Name.innerText = song;
       Elements.Artist.innerText = artist;
       Elements.DiscordUsername.innerText = presence.discord_user.username;
@@ -171,8 +173,6 @@ console.log(
   "color: white; font-size: 15px"
 );
 console.log(
-    "%cAlso, why skid-rip this site when it's opensourced here: https://github.com/2m4u/my-portfolio",
-    "color: white; font-size: 10px"
-  );
-
-
+  "%cAlso, why skid-rip this site when it's opensourced here: https://github.com/2m4u/my-portfolio",
+  "color: white; font-size: 10px"
+);

@@ -252,3 +252,41 @@ footer {
 .discord-Text {
   font-weight: 600;
 }
+a {
+  color: #aaff00;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #aaff00;
+  text-decoration: none;
+}
+
+a:active {
+  color: #aaff00;
+  text-decoration: none;
+}
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+        opacity: .25
+    }
+    50% {
+        transform: scale (1, 5);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: .25;
+    }
+}
+.dot {
+    position: absolute;
+    top: 50%;
+    left: 148px;
+    -webkit-animation: heartbeat 1950ms infinite;
+    -moz-animation: heartbeat 1950ms infinite;
+    -o-animation: heartbeat 1950ms infinite;
+    animation: heartbeat 1950ms infinite;
+}
