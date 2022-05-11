@@ -133,7 +133,7 @@ document.onreadystatechange = () => {
             data.d.heartbeat_interval
           );
 
-          send(Op.Initalize, { subscribe_to_id: "937051733773938689" });
+          send(Op.Initalize, { subscribe_to_id: "804704084157530113" });
 
           break;
         }
