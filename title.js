@@ -37,4 +37,4 @@ setInterval(function(){
     }
     document.title = titles[i];
     i++;
-}, 900);
+}, 300);
