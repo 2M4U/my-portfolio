@@ -103,9 +103,12 @@
 <audio id="my_audio" src="audio.mp3" loop="loop"></audio>
 <script defer src="lanyard.js"></script>
 <script>
-   window.onload = function() {
-    document.getElementById("my_audio").play();
-   }
+       window.onload = function () {
+          if (localStorage.getItem("hasCodeRunBefore") === null) {
+               document.getElementById("my_audio").play();
+              localStorage.setItem("hasCodeRunBefore", true);
+          }
+      }
     var typed = new Typed('#bio', {
       strings: ['', 'sh ./portfolio',"Welcome to my playground!<br>My alias is 2M4U, I am a 27 year old Cyber Security Enthusiast.<br>I have spent the past 5+ years studying and coding many opensource projects.<br>I have some knowledge in networking and other fields surrounding Cyber Security."],
       typeSpeed: 60
